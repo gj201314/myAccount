@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { useApp } from '@/context/AppContext';
 import PageHeader from '@/components/PageHeader';
 import { numberToChinese } from '@/lib/currency';
@@ -59,7 +58,7 @@ export default function EditRecordPage() {
     if (!channel) errors.push('请选择支付渠道');
 
     if (errors.length > 0) {
-      toast(errors.join('\n'));
+      alert(errors.join('\n'));
       return;
     }
 
@@ -74,7 +73,7 @@ export default function EditRecordPage() {
       isDone,
     });
 
-    toast.success('保存成功');
+    alert('保存成功');
     navigate(`/person/${encodeURIComponent(name.trim())}`);
   };
 

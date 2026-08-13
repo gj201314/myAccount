@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { useApp } from '@/context/AppContext';
 import { exportToCSV, importFromCSV } from '@/lib/csv';
 import { Plus, Download, Upload, Moon, Sun } from 'lucide-react';
@@ -22,9 +21,9 @@ export default function SettingsPage() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      toast.success('导出成功');
+      alert('导出成功');
     } catch (e) {
-      toast.error('导出失败');
+      alert('导出失败');
     }
   };
 
@@ -40,13 +39,13 @@ export default function SettingsPage() {
       const text = await file.text();
       const imported = importFromCSV(text);
       if (imported.length === 0) {
-        toast.error('文件格式错误或无数据');
+        alert('文件格式错误或无数据');
         return;
       }
       replaceAll(imported);
-      toast.success(`导入成功，共 ${imported.length} 条记录`);
+      alert(`导入成功，共 ${imported.length} 条记录`);
     } catch {
-      toast.error('导入失败，文件格式错误');
+      alert('导入失败，文件格式错误');
     } finally {
       // 重置 input 以便重复选择同一文件
       if (fileInputRef.current) fileInputRef.current.value = '';

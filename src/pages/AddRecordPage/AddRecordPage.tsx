@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { useApp } from '@/context/AppContext';
 import PageHeader from '@/components/PageHeader';
 import { numberToChinese } from '@/lib/currency';
@@ -68,13 +67,13 @@ export default function AddRecordPage() {
     setErrors(next);
 
     if (messages.length > 0) {
-      toast(messages.join('\n'));
+      alert(messages.join('\n'));
       return false;
     }
     return true;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (code: number) => {
     if (!validate()) return;
 
     addRecord({
@@ -88,8 +87,12 @@ export default function AddRecordPage() {
       isDone: type === 'lend' ? false : true,
     });
 
-    toast.success('添加成功');
-    navigate('/settings');
+    alert('添加成功');
+    if(code === 1) {
+      navigate('/settings');
+    }else{
+      setMoney("");
+    }
   };
 
   return (
@@ -238,12 +241,20 @@ export default function AddRecordPage() {
 
       {/* 底部提交按钮 */}
       <div className="fixed bottom-0 left-0 right-0 border-t border-border bg-background/95 p-4 backdrop-blur-md pb-[calc(1rem+env(safe-area-inset-bottom))]">
-        <div className="mx-auto max-w-md">
+        <div className="mx-auto max-w-md flex">
           <button
-            onClick={handleSubmit}
+            onClick={()=>handleSubmit(1)}
             className="h-12 w-full rounded-xl bg-primary text-base font-medium text-primary-foreground transition-opacity active:opacity-80"
+            style={{ width: '45%' }}
           >
             提交
+          </button>
+          <button
+            onClick={() => handleSubmit(2)}
+            className="h-12 w-full rounded-xl bg-success text-base font-medium text-primary-foreground transition-opacity active:opacity-80"
+            style={{ width: '45%',marginLeft: '10%' }}
+          >
+            再次编辑
           </button>
         </div>
       </div>

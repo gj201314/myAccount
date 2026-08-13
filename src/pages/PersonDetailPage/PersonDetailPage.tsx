@@ -1,5 +1,4 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { useApp } from '@/context/AppContext';
 import PageHeader from '@/components/PageHeader';
 import { getTypeLabel, type IRecord, type RecordType } from '@/data/record';
@@ -41,13 +40,13 @@ export default function PersonDetailPage() {
   const handleDelete = (id: string) => {
     if (window.confirm('确定要删除这条记录吗？')) {
       deleteRecord(id);
-      toast.success('删除成功');
+      alert('删除成功');
     }
   };
 
   const handleMarkDone = (id: string) => {
     markDone(id);
-    toast.success('已标记为结清');
+    alert('已标记为结清');
   };
 
   return (

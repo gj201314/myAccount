@@ -1,7 +1,5 @@
 // EXPORTS: IRecord, RecordType, ChannelType, STORAGE_KEY, THEME_KEY, loadRecords, saveRecords
 
-import { scopedStorage } from '@lark-apaas/client-toolkit-lite';
-
 export type RecordType = 'lend' | 'borrow' | 'return';
 export type ChannelType = '微信' | '支付宝' | '银行卡';
 
@@ -22,7 +20,7 @@ export const THEME_KEY = 'ledger_dark_v2';
 
 export function loadRecords(): IRecord[] {
   try {
-    const raw = scopedStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed)) return parsed as IRecord[];
@@ -33,7 +31,7 @@ export function loadRecords(): IRecord[] {
 }
 
 export function saveRecords(records: IRecord[]): void {
-  scopedStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
 }
 
 export function getTypeLabel(type: RecordType): string {
