@@ -823,7 +823,7 @@
         padding: 0
     }
 
-    html,: host {
+    html,:host {
         -webkit-text-size-adjust:100%;
         tab-size: 4;
         line-height: 1.5;
@@ -838,12 +838,6 @@
         color: inherit;
         border-top-width: 1px
     }
-
-    abbr: where([title]) {
-        -webkit-text-decoration:underline dotted;
-        text-decoration: underline dotted
-    }
-
     h1,h2,h3,h4,h5,h6 {
         font-size: inherit;
         font-weight: inherit
@@ -953,43 +947,43 @@
         border-radius: 0
     }
 
-    :where(select: -webkit-any([multiple],[size])) optgroup {
+    :where(select:-webkit-any([multiple],[size])) optgroup {
         font-weight:bolder
     }
 
-    :where(select: is([multiple],[size])) optgroup {
+    :where(select:is([multiple],[size])) optgroup {
         font-weight:bolder
     }
 
-    :where(select: -webkit-any([multiple],[size])) optgroup option:not(:-webkit-any(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi))) {
+    :where(select:-webkit-any([multiple],[size])) optgroup option:not(:-webkit-any(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi))) {
         padding-left:20px
     }
 
-    :where(select: is([multiple],[size])) optgroup option:not(:is(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi))) {
+    :where(select:is([multiple],[size])) optgroup option:not(:is(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi))) {
         padding-left:20px
     }
 
-    :where(select: -webkit-any([multiple],[size])) optgroup option:-webkit-any(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi)) {
+    :where(select:-webkit-any([multiple],[size])) optgroup option:-webkit-any(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi)) {
         padding-right:20px
     }
 
-    :where(select: is([multiple],[size])) optgroup option:is(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi)) {
+    :where(select:is([multiple],[size])) optgroup option:is(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi)) {
         padding-right:20px
     }
 
-    :not(:-webkit-any(:lang(ae),: lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi)))::-webkit-file-upload-button {
+    :not(:-webkit-any(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi)))::-webkit-file-upload-button {
         margin-right:4px
     }
 
-    :not(:is(:lang(ae),: lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi)))::file-selector-button {
+    :not(:is(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi)))::file-selector-button {
         margin-right:4px
     }
 
-    :-webkit-any(:lang(ae),: lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi))::-webkit-file-upload-button {
+    :-webkit-any(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi))::-webkit-file-upload-button {
         margin-left:4px
     }
 
-    :is(:lang(ae),: lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi))::file-selector-button {
+    :is(:lang(ae),:lang(ar),:lang(arc),:lang(bcc),:lang(bqi),:lang(ckb),:lang(dv),:lang(fa),:lang(glk),:lang(he),:lang(ku),:lang(mzn),:lang(nqo),:lang(pnb),:lang(ps),:lang(sd),:lang(ug),:lang(ur),:lang(yi))::file-selector-button {
         margin-left:4px
     }
 
@@ -1088,7 +1082,7 @@
         appearance: button
     }
 
-    input: where([type=button],[type=reset],[type=submit]) {
+    input:where([type=button],[type=reset],[type=submit]) {
         -webkit-appearance:button;
         appearance: button
     }
@@ -1111,7 +1105,7 @@
         height: auto
     }
 
-    [hidden]: where(:not([hidden=until-found])) {
+    [hidden]:where(:not([hidden=until-found])) {
         display:none!important
     }
 
@@ -2491,13 +2485,13 @@
         gap: calc(var(--spacing) * var(--gap))
     }
 
-    :where(.space-y-0\.5>: not(:last-child)) {
+    :where(.space-y-0\.5>:not(:last-child)) {
         --tw-space-y-reverse:0;
         margin-top: calc(calc(var(--spacing) * .5) * var(--tw-space-y-reverse));
         margin-bottom: calc(calc(var(--spacing) * .5) * calc(1 - var(--tw-space-y-reverse)))
     }
 
-    :where(.space-y-1\.5>: not(:last-child)) {
+    :where(.space-y-1\.5>:not(:last-child)) {
         --tw-space-y-reverse:0;
         margin-top: calc(calc(var(--spacing) * 1.5) * var(--tw-space-y-reverse));
         margin-bottom: calc(calc(var(--spacing) * 1.5) * calc(1 - var(--tw-space-y-reverse)))
@@ -6211,7 +6205,7 @@
             color: var(--sidebar-accent-foreground)
         }
 
-        .not-disabled\:hover\:shadow-\[0_0_0_1px_hsl\(var\(--sidebar-accent\)\)\]: not(:disabled):hover {
+        .not-disabled\:hover\:shadow-\[0_0_0_1px_hsl\(var\(--sidebar-accent\)\)\]:not(:disabled):hover {
             --tw-shadow:0 0 0 1px var(--tw-shadow-color,hsl(var(--sidebar-accent)));
             box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)
         }
