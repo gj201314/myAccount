@@ -3,7 +3,7 @@
 import type { IRecord, RecordType, ChannelType } from '@/data/record';
 
 const CSV_HEADERS = [
-  'ID', '姓名', '交易日期', '金额', '类型', '支付渠道', '约定还款日', '备注', '是否结清',
+  'ID', '姓名', '交易日期', '金额', '类型', '支付渠道', '约定还款日', '备注',
 ];
 
 function escapeCSV(value: string | number | boolean | undefined): string {
@@ -63,7 +63,6 @@ export function exportToCSV(records: IRecord[]): string {
       escapeCSV(r.channel),
       escapeCSV(r.repayDate ?? ''),
       escapeCSV(r.note ?? ''),
-      escapeCSV(r.isDone ? '是' : '否'),
     ].join(','));
   }
 
@@ -88,11 +87,10 @@ export function importFromCSV(csvText: string): IRecord[] {
     const cols = parseCSVLine(lines[i]);
     if (cols.length < 6) continue;
 
-    const [id, name, tradeDate, moneyStr, typeStr, channel, repayDate, note, isDoneStr] = cols;
+    const [id, name, tradeDate, moneyStr, typeStr, channel, repayDate, note] = cols;
 
     const type = typeReverse[typeStr] ?? 'lend';
     const money = parseFloat(moneyStr) || 0;
-    const isDone = isDoneStr === '是' || isDoneStr === 'true';
 
     records.push({
       id: id || String(Date.now() + i),
@@ -102,8 +100,7 @@ export function importFromCSV(csvText: string): IRecord[] {
       type,
       channel: (channelValues.includes(channel as ChannelType) ? channel : '微信') as ChannelType,
       repayDate: repayDate || undefined,
-      note: note || undefined,
-      isDone,
+      note: note || undefined
     });
   }
 

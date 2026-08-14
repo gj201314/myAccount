@@ -10,8 +10,8 @@ const TYPE_COLORS: Record<RecordType, { bg: string; text: string }> = {
   return: { bg: 'bg-[#00b42a]/10', text: 'text-[#00b42a]' },
 };
 
-function isOverdue(repayDate: string | undefined, isDone: boolean): boolean {
-  if (!repayDate || isDone) return false;
+function isOverdue(repayDate: string | undefined): boolean {
+  if (!repayDate) return false;
   const today = new Date().toISOString().slice(0, 10);
   return repayDate < today;
 }
@@ -19,7 +19,7 @@ function isOverdue(repayDate: string | undefined, isDone: boolean): boolean {
 export default function PersonDetailPage() {
   const { name } = useParams<{ name: string }>();
   const navigate = useNavigate();
-  const { records, deleteRecord, markDone } = useApp();
+  const { records, deleteRecord } = useApp();
 
   const personName = name ? decodeURIComponent(name) : '';
   const personRecords = records
@@ -32,7 +32,7 @@ export default function PersonDetailPage() {
   }, 0);
 
   const totalPending = personRecords.reduce((sum, r) => {
-    if (r.type === 'lend' && !r.isDone) return sum + r.money;
+    if (r.type === 'lend') return sum + r.money;
     if (r.type === 'return') return sum - r.money;
     return sum;
   }, 0);
@@ -42,11 +42,6 @@ export default function PersonDetailPage() {
       deleteRecord(id);
       alert('删除成功');
     }
-  };
-
-  const handleMarkDone = (id: string) => {
-    markDone(id);
-    alert('已标记为结清');
   };
 
   return (
@@ -81,7 +76,7 @@ export default function PersonDetailPage() {
           ) : (
             personRecords.map((record: IRecord) => {
               const color = TYPE_COLORS[record.type];
-              const overdue = record.type === 'lend' && isOverdue(record.repayDate, record.isDone);
+              const overdue = record.type === 'lend' && isOverdue(record.repayDate);
 
               return (
                 <div key={record.id} className="rounded-2xl bg-card p-4 shadow-sm">
@@ -91,11 +86,6 @@ export default function PersonDetailPage() {
                         <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${color.bg} ${color.text}`}>
                           {getTypeLabel(record.type)}
                         </span>
-                        {record.isDone && record.type === 'lend' && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-[#00b42a]/10 px-2 py-0.5 text-xs font-medium text-[#00b42a]">
-                            <CheckCircle className="h-3 w-3" /> 已结清
-                          </span>
-                        )}
                         {overdue && (
                           <span className="inline-flex items-center rounded-full bg-[#f53f3f]/10 px-2 py-0.5 text-xs font-medium text-[#f53f3f]">
                             已逾期
@@ -115,15 +105,6 @@ export default function PersonDetailPage() {
                   </div>
 
                   <div className="mt-3 flex gap-2 border-t border-border/60 pt-3">
-                    {record.type === 'lend' && !record.isDone && (
-                      <button
-                        onClick={() => handleMarkDone(record.id)}
-                        className="flex flex-1 items-center justify-center gap-1 rounded-xl bg-[#00b42a]/10 py-2.5 text-sm font-medium text-[#00b42a] transition-opacity active:opacity-60"
-                      >
-                        <CheckCircle className="h-4 w-4" />
-                        标记结清
-                      </button>
-                    )}
                     <button
                       onClick={() => navigate(`/edit/${record.id}`)}
                       className="flex flex-1 items-center justify-center gap-1 rounded-xl bg-muted py-2.5 text-sm font-medium text-foreground transition-opacity active:opacity-60"

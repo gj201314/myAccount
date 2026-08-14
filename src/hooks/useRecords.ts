@@ -42,10 +42,6 @@ export function useRecords() {
     });
   }, []);
 
-  const markDone = useCallback((id: string) => {
-    updateRecord(id, { isDone: true });
-  }, [updateRecord]);
-
   const replaceAll = useCallback((newRecords: IRecord[]) => {
     updateRecords(newRecords);
   }, [updateRecords]);
@@ -56,15 +52,9 @@ export function useRecords() {
     return sum;
   }, 0);
 
-  // 统计：待收回金额（借出且未结清）
-  const totalPending = records.reduce((sum, r) => {
-    if (r.type === 'lend' && !r.isDone) return sum + r.money;
-    return sum;
-  }, 0);
-
-  // 统计：已收回金额（借出且已结清）
+  // 统计：已收回金额
   const totalRecovered = records.reduce((sum, r) => {
-    if (r.type === 'lend' && r.isDone) return sum + r.money;
+    if (r.type === 'lend') return sum + r.money;
     return sum;
   }, 0);
 
@@ -74,22 +64,25 @@ export function useRecords() {
     return sum;
   }, 0);
 
+  // 统计：待收回金额
+  const totalPending = (totalLend - totalReturn);
+
   // 按人员汇总
   const personSummary = (() => {
-    const map = new Map<string, { name: string; totalLend: number; totalPending: number }>();
+    const map = new Map<string, { name: string; totalLend: number; totalReturn: number; totalPending: number }>();
     for (const r of records) {
       if (!map.has(r.name)) {
-        map.set(r.name, { name: r.name, totalLend: 0, totalPending: 0 });
+        map.set(r.name, { name: r.name, totalLend: 0, totalReturn: 0, totalPending: 0 });
       }
       const p = map.get(r.name)!;
       if (r.type === 'lend') {
         p.totalLend += r.money;
-        if (!r.isDone) p.totalPending += r.money;
       }
       if (r.type === 'return') {
         // 归还减少待收回
-        p.totalPending = Math.max(0, p.totalPending - r.money);
+        p.totalReturn = p.totalReturn + r.money;
       }
+      p.totalPending = p.totalLend - p.totalReturn;
     }
     return Array.from(map.values()).sort((a, b) => b.totalPending - a.totalPending);
   })();
@@ -120,7 +113,6 @@ export function useRecords() {
     addRecord,
     updateRecord,
     deleteRecord,
-    markDone,
     replaceAll,
     totalLend,
     totalPending,

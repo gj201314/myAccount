@@ -12,7 +12,6 @@ export interface IRecord {
   channel: ChannelType;
   repayDate?: string;
   note?: string;
-  isDone: boolean;
 }
 
 export const STORAGE_KEY = 'borrow_ledger_v2';

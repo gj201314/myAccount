@@ -27,7 +27,6 @@ export default function EditRecordPage() {
   const [channel, setChannel] = useState<ChannelType>(record?.channel ?? '微信');
   const [repayDate, setRepayDate] = useState(record?.repayDate ?? '');
   const [note, setNote] = useState(record?.note ?? '');
-  const [isDone, setIsDone] = useState(record?.isDone ?? false);
 
   // id 变化时重新加载（虽然 id 不变，但保险）
   useEffect(() => {
@@ -39,7 +38,6 @@ export default function EditRecordPage() {
       setChannel(record.channel);
       setRepayDate(record.repayDate ?? '');
       setNote(record.note ?? '');
-      setIsDone(record.isDone);
     }
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -69,8 +67,7 @@ export default function EditRecordPage() {
       type,
       channel,
       repayDate: type === 'lend' ? repayDate || undefined : undefined,
-      note: note.trim() || undefined,
-      isDone,
+      note: note.trim() || undefined
     });
 
     alert('保存成功');
@@ -196,26 +193,6 @@ export default function EditRecordPage() {
               onChange={e => setRepayDate(e.target.value)}
               className="h-12 w-full rounded-xl border border-input bg-background px-4 text-sm text-foreground outline-none transition-colors focus:border-primary"
             />
-          </div>
-        )}
-
-        {/* 是否结清 */}
-        {type === 'lend' && (
-          <div className="flex items-center justify-between rounded-xl bg-card px-4 py-3 shadow-sm">
-            <span className="text-sm font-medium text-foreground">是否已结清</span>
-            <button
-              onClick={() => setIsDone(!isDone)}
-              className={`relative h-6 w-11 rounded-full transition-colors ${
-                isDone ? 'bg-[#00b42a]' : 'bg-muted'
-              }`}
-              aria-label="切换结清状态"
-            >
-              <span
-                className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
-                  isDone ? 'translate-x-5' : 'translate-x-0.5'
-                }`}
-              />
-            </button>
           </div>
         )}
 

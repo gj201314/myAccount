@@ -83,8 +83,7 @@ export default function AddRecordPage() {
       type,
       channel,
       repayDate: type === 'lend' ? repayDate || undefined : undefined,
-      note: note.trim() || undefined,
-      isDone: type === 'lend' ? false : true,
+      note: note.trim() || undefined
     });
 
     alert('添加成功');

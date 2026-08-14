@@ -8,7 +8,6 @@ interface AppContextValue {
   addRecord: (record: Omit<IRecord, 'id'>) => IRecord;
   updateRecord: (id: string, updates: Partial<IRecord>) => void;
   deleteRecord: (id: string) => void;
-  markDone: (id: string) => void;
   replaceAll: (records: IRecord[]) => void;
   totalLend: number;
   totalPending: number;
